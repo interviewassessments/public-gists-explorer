@@ -19,7 +19,7 @@ import pythontag from '../../images/python-tag.png';
 import copyText from '../../utils/copyText';
 import styles from './styles';
 
-const ResultsTableData = ({ gists }: any) => {
+const ResultsTableData = ({ gists, showForkedUsers }: any) => {
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -39,10 +39,6 @@ const ResultsTableData = ({ gists }: any) => {
       border: 0,
     },
   }));
-
-  const showForkedUsers = (forksUrl: any) => {
-    // implementing the forked users modal
-  };
 
   const showFileNames = (row: any): any => {
     const fileNames = Object.keys(row.files);

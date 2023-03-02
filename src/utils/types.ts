@@ -61,4 +61,5 @@ export interface PublicGistsState {
   gists: GistsData[];
   error: error;
   isEndReached: boolean,
+  forkedUsers: GistsData[] | undefined;
 }

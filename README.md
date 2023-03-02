@@ -69,3 +69,11 @@ yarn or npm start
 main - master or production branch
 
 The rest are the feature branches used while developing the app.
+
+## Improvements
+
+As this assignment deals with frontend development, there should some specific reliable information should be presented so that we can make the look and feel lot better. As most of the information provided is not always present like Description or some reliable information then it would be much better to showcase them pointing to the details.
+
+## Feedback
+
+Overall, I enjoyed working on this assessment as it is more open ended so you can put your creative thoughts to make it fun developing activity along with refreshing you User Experience skills to get the best out of it with minimum number of user clicks.

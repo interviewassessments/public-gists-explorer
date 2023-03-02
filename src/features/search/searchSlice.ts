@@ -1,7 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { BASE_URL } from '../../api/apiConstants';
+import { fetchForkedUsersAPI } from '../../api/fetchForkedUsersAPI';
 import { fetchPublicGistsAPI } from '../../api/fetchPublicGistsAPI';
-import { GENERAL_ERROR_MESSAGE, initialPublicGistData, PAGE_SIZE } from '../../utils/constants';
+import {
+  GENERAL_ERROR_MESSAGE,
+  initialPublicGistData,
+  PAGE_SIZE,
+} from '../../utils/constants';
 import { GistsData, PublicGistsState } from '../../utils/types';
 
 const initialState: PublicGistsState = {
@@ -11,6 +16,7 @@ const initialState: PublicGistsState = {
     message: '',
   },
   isEndReached: false,
+  forkedUsers: initialPublicGistData,
 };
 
 const requestParams = {
@@ -26,6 +32,18 @@ export const fetchPublicGists = createAsyncThunk(
     try {
       const url = `${BASE_URL}/users/${userInfoObj.userName}/gists?page=${userInfoObj.pageNumber}&per_page=${PAGE_SIZE}`;
       const response = await fetchPublicGistsAPI(url, requestParams);
+      return response as GistsData[];
+    } catch (e) {
+      console.error(e);
+    }
+  }
+);
+
+export const fetchForkedUsers = createAsyncThunk(
+  'gists/fetchForkedUsers',
+  async (forksUrl: string) => {
+    try {
+      const response = await fetchForkedUsersAPI(forksUrl, requestParams);
       return response as GistsData[];
     } catch (e) {
       console.error(e);
@@ -71,6 +89,19 @@ const searchSlice = createSlice({
         state.loading = false;
         state.error.message = GENERAL_ERROR_MESSAGE;
         state.gists = [];
+      }).addCase(fetchForkedUsers.pending, (state) => {
+        state.loading = true;
+        state.error.message = '';
+        state.forkedUsers = [];
+      })
+      .addCase(fetchForkedUsers.fulfilled, (state, action) => {
+        state.forkedUsers = action.payload;
+        state.loading = false;
+        state.error.message = '';
+      })
+      .addCase(fetchForkedUsers.rejected, (state) => {
+        state.loading = false;
+        state.error.message = GENERAL_ERROR_MESSAGE;
       });
   },
 });

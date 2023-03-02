@@ -28,8 +28,10 @@ const SearchPage = () => {
     (state) => state.search
   );
 
+  const publicGists = gists.filter((gist: any) => gist.public === true);
+
   useEffect(() => {
-    if (gists?.length >= 30) {
+    if (publicGists?.length >= 30) {
       dispatch(fetchPublicGists({ userName, pageNumber }));
     }
   }, [pageNumber]);
@@ -45,7 +47,7 @@ const SearchPage = () => {
   };
 
   const LoadMore = () => {
-    if (gists.length >= PAGE_SIZE && isEndReached === false) {
+    if (publicGists.length >= PAGE_SIZE && isEndReached === false) {
       return (
         <LoadingButton
           variant='text'
@@ -114,7 +116,7 @@ const SearchPage = () => {
   );
 
   const getAvatar = () => {
-    const userObj: any = gists[0];
+    const userObj: any = publicGists[0];
     return userObj?.owner?.avatar_url || '';
   };
 
@@ -134,7 +136,10 @@ const SearchPage = () => {
       >
         <Grid item xs={2}></Grid>
         <Grid item xs={8}>
-          <ResultsTableData gists={gists} showForkedUsers={showForkedUsers} />
+          <ResultsTableData
+            gists={publicGists}
+            showForkedUsers={showForkedUsers}
+          />
         </Grid>
         <Grid item xs={2}></Grid>
         <LoadMore />
@@ -175,9 +180,9 @@ const SearchPage = () => {
   return (
     <React.Fragment>
       <SearchBox />
-      {loading && gists.length === 0 ? (
+      {loading && publicGists.length === 0 ? (
         <LoadingIndicator />
-      ) : gists.length !== 0 ? (
+      ) : publicGists.length !== 0 ? (
         <ResultsInfo />
       ) : (
         <NoUsersFound />
@@ -203,16 +208,13 @@ const SearchPage = () => {
                   id='transition-modal-title'
                   variant='h6'
                   component='h2'
-                  sx={styles.paddingBottom20}
+                  sx={[styles.paddingBottom20, styles.textAlignCenter]}
                 >
                   {copyText.forkedLastThreeUsers}
                 </Typography>
                 {forkedUsers?.slice(-3).map((user: any) => {
                   return (
-                    <Container
-                      disableGutters
-                      sx={styles.forkedUsersContainer}
-                    >
+                    <Container disableGutters sx={styles.forkedUsersContainer}>
                       <img
                         src={user?.owner?.avatar_url}
                         width='50px'
@@ -229,7 +231,9 @@ const SearchPage = () => {
                 })}
               </>
             ) : (
-              <Typography variant='h5'>{copyText.noForkedUsers}</Typography>
+              <Typography variant='h5' sx={styles.textAlignCenter}>
+                {copyText.noForkedUsers}
+              </Typography>
             )}
           </Box>
         </Fade>

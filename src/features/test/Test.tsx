@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, Typography, Button } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { sayHello } from './testSlice';
 
@@ -11,11 +12,11 @@ const Test = () => {
   };
 
   return (
-    <div>
-      <div style={{textAlign: 'center', fontSize: '20px'}}>Test Redux Toolkit Feature</div>
-      <div style={{textAlign: 'center'}}>{message}</div>
-      <button onClick={handleClick}>Say Hello</button>
-    </div>
+    <Container disableGutters>
+      <Typography sx={{textAlign: 'center'}} variant='h2'>Test Redux Toolkit Feature</Typography>
+      <Typography sx={{textAlign: 'center'}} variant='body1'>{message}</Typography>
+      <Button variant='contained' onClick={handleClick}>Say Hello</Button>
+    </Container>
   );
 };
 

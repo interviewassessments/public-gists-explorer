@@ -1,46 +1,71 @@
-# Getting Started with Create React App
+# Public Gists Explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+This project is created with the help of create-react-app with Typescript template to faciliate strictly typed javascript.
 
-In the project directory, you can run:
+## Requirements
 
-### `npm start`
+### Goal
+The goal of this technical assessment is to evaluate ability and core competency in areas relevant to the front-end development at EventMobi. These include:
+• Ability to use JavaScript MVC frameworks to interact with APIs.
+• Competence with creation and implementation of basic designs.
+• Aptitude with HTML and CSS to create clean, readable and performant code.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Through the completion of this test, you will be able to demonstrate your abilities as a developer.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Details
+Use the API provided by GitHub Gist API (which is documented here), create a basic website as a single-page app with React.
+Your task is to use Gist API to create a simple single-page application. A user should be able to enter a username and get the full list of public Gists for that user. 
 
-### `npm test`
+### The following are a list of functional requirements for this assignment:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+• Search: When a user enters a username, it should be able to get a full list of public Gists by that user.
 
-### `npm run build`
+• Filetype: Convert the filetypes of the files in the gist into a tag/badge, (e.g, if the returned gist has list of files containing python and JavaScript files, the gist should have the respective tags/badges).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+• Fork: Username/Avatar of the last 3 users who forked it with avatar linking to the fork.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Assumptions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. This application apis are being used from github public gist document [here](https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#about-gists) and followed JavaScript way of getting the api response
+2. The response came from public gists are not unquie sometimes, so while rendering data in the table getting the key warning in the console.
+3. No testing was carried out due to time constraint but testing can be performed using jest and snapshot testing.
+4. The page size for each response is set to 30
 
-### `npm run eject`
+## Application Architecture
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Added pagination to load 30 records for each page
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### React + React Hooks
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+[React](https://reactjs.org/)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Typescript:
 
-## Learn More
+[Typescript](https://www.typescriptlang.org/) is used for type checking of the data being used and enforce the strong type checking in our app.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Redux Toolkit:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Carlisting app used [Redux toolkit](https://redux-toolkit.js.org/) as a middle layer to manage the side effects of the applications and as well as to maintain the single source of truth with redux application statement management
+
+### Material-UI Component Library
+
+[Material-UI](https://mui.com/material-ui/getting-started/overview/) is being used to get the look and feel of the application. It is the componet library used in this application.
+
+
+## Running the app:
+
+To run the public-gists-explorer app, you need to run the following commands
+
+yarn or npm start
+
+### Github
+
+[Github](https://github.com/interviewassessments/public-gists-explorer)
+
+## Branched used
+
+main - master or production branch
+
+The rest are the feature branches used while developing the app.
